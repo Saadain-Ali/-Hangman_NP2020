@@ -33,8 +33,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="connection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +77,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Signin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Signin.Designer.cs">
+      <DependentUpon>Signin.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +94,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Signin.resx">
+      <DependentUpon>Signin.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +112,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MetroFramework.txt" />
+    <None Include="Resources\peeps\pose-mask-2.png" />
+    <None Include="Resources\zsasfafs.jpeg" />
+    <None Include="Resources\wallpaperflare.com_wallpapesadr.jpg" />
+    <None Include="Resources\wallpaperflare.com_wallpaper.jpg" />
+    <None Include="Resources\surface_texture_stains_background_50906_1280x960.jpg" />
+    <None Include="Resources\surface_spot_dark_texture_50554_1920x1200.jpg" />
+    <None Include="Resources\space_astronauts.png" />
+    <None Include="Resources\sdad.jpg" />
+    <None Include="Resources\sda.jpg" />
+    <None Include="Resources\patterns-blue-white-hd-wallpaper-1080p.jpg" />
+    <None Include="Resources\pattern_background_spot_74877_1920x1080.jpg" />
+    <None Include="Resources\paper.jpg" />
+    <None Include="Resources\overlapping-blue-and-silver-triangles-26049-1920x1200.jpg" />
+    <None Include="Resources\music.png" />
+    <None Include="Resources\glare_light_shape_bright_46585_1920x1080.jpg" />
+    <None Include="Resources\glare_colorful_abstract_106186_1920x1080.jpg" />
+    <None Include="Resources\glare_circles_colorful_bright_background_47419_1920x1080.jpg" />
+    <None Include="Resources\diamond-background1.jpg" />
+    <None Include="Resources\black_background_pattern_light_texture_55291_1024x768.jpg" />
+    <None Include="Resources\background_texture_surface_dark_50699_1280x960.jpg" />
+    <None Include="Resources\background_dots_shadow_spot_50673_1280x960.jpg" />
+    <None Include="Resources\background_bumps_light_86951_1920x1080.jpg" />
+    <None Include="Resources\asfas.jpg" />
+    <None Include="Resources\aaaa.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
