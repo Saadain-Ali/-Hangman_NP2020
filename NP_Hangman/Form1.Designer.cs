@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hangman));
             this.Parent_pnl = new MetroFramework.Controls.MetroPanel();
             this.metroRadioButton1 = new MetroFramework.Controls.MetroRadioButton();
-            this.playStatuslbl = new System.Windows.Forms.Label();
             this.messageCmnt = new System.Windows.Forms.Label();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.lenLbl = new System.Windows.Forms.Label();
@@ -50,35 +50,44 @@
             this.bunifuGradientPanel2 = new Bunifu.Framework.UI.BunifuGradientPanel();
             this.cncttxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.cnctbtn = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.playStatuslbl = new System.Windows.Forms.Label();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.currentPlayerLbl = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.bunifuGradientPanel1 = new Bunifu.Framework.UI.BunifuGradientPanel();
+            this.picturepnl = new System.Windows.Forms.Panel();
+            this.HG5 = new System.Windows.Forms.PictureBox();
+            this.HG3 = new System.Windows.Forms.PictureBox();
+            this.HG4 = new System.Windows.Forms.PictureBox();
+            this.HG2 = new System.Windows.Forms.PictureBox();
+            this.HG1 = new System.Windows.Forms.PictureBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.nameTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.HostBtn = new MaterialSkin.Controls.MaterialRaisedButton();
             this.playBTN = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.Parent_pnl.SuspendLayout();
             this.wordPanel.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.bunifuGradientPanel2.SuspendLayout();
             this.bunifuGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.picturepnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HG5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG1)).BeginInit();
             this.SuspendLayout();
             // 
             // Parent_pnl
             // 
             this.Parent_pnl.BackColor = System.Drawing.Color.White;
             this.Parent_pnl.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
-            this.Parent_pnl.Controls.Add(this.metroRadioButton1);
-            this.Parent_pnl.Controls.Add(this.playStatuslbl);
+            this.Parent_pnl.Controls.Add(this.textBox1);
             this.Parent_pnl.Controls.Add(this.messageCmnt);
             this.Parent_pnl.Controls.Add(this.metroLabel8);
             this.Parent_pnl.Controls.Add(this.lenLbl);
@@ -106,7 +115,7 @@
             this.Parent_pnl.Location = new System.Drawing.Point(27, 39);
             this.Parent_pnl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Parent_pnl.Name = "Parent_pnl";
-            this.Parent_pnl.Size = new System.Drawing.Size(997, 557);
+            this.Parent_pnl.Size = new System.Drawing.Size(1102, 560);
             this.Parent_pnl.Style = MetroFramework.MetroColorStyle.White;
             this.Parent_pnl.TabIndex = 0;
             this.Parent_pnl.VerticalScrollbarBarColor = true;
@@ -122,7 +131,7 @@
             this.metroRadioButton1.FontSize = MetroFramework.MetroLinkSize.Tall;
             this.metroRadioButton1.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             this.metroRadioButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.metroRadioButton1.Location = new System.Drawing.Point(735, 401);
+            this.metroRadioButton1.Location = new System.Drawing.Point(26, 455);
             this.metroRadioButton1.Margin = new System.Windows.Forms.Padding(15, 20, 15, 15);
             this.metroRadioButton1.Name = "metroRadioButton1";
             this.metroRadioButton1.Size = new System.Drawing.Size(95, 24);
@@ -132,23 +141,15 @@
             this.metroRadioButton1.Text = "Zoomer";
             this.metroRadioButton1.UseStyleColors = true;
             this.metroRadioButton1.UseVisualStyleBackColor = true;
-            // 
-            // playStatuslbl
-            // 
-            this.playStatuslbl.AutoSize = true;
-            this.playStatuslbl.Font = new System.Drawing.Font("SF Mono", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playStatuslbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            this.playStatuslbl.Location = new System.Drawing.Point(607, 376);
-            this.playStatuslbl.Name = "playStatuslbl";
-            this.playStatuslbl.Size = new System.Drawing.Size(0, 29);
-            this.playStatuslbl.TabIndex = 1;
+            this.metroRadioButton1.Visible = false;
+            this.metroRadioButton1.CheckedChanged += new System.EventHandler(this.metroRadioButton1_CheckedChanged);
             // 
             // messageCmnt
             // 
             this.messageCmnt.AutoSize = true;
             this.messageCmnt.Font = new System.Drawing.Font("SF Compact Display", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messageCmnt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            this.messageCmnt.Location = new System.Drawing.Point(359, 280);
+            this.messageCmnt.Location = new System.Drawing.Point(211, 380);
             this.messageCmnt.Name = "messageCmnt";
             this.messageCmnt.Size = new System.Drawing.Size(0, 25);
             this.messageCmnt.TabIndex = 36;
@@ -162,7 +163,7 @@
             this.metroLabel8.CustomBackground = true;
             this.metroLabel8.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel8.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel8.Location = new System.Drawing.Point(195, 192);
+            this.metroLabel8.Location = new System.Drawing.Point(192, 186);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(52, 17);
             this.metroLabel8.Style = MetroFramework.MetroColorStyle.Teal;
@@ -174,9 +175,10 @@
             // 
             this.lenLbl.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lenLbl.AutoSize = true;
+            this.lenLbl.Enabled = false;
             this.lenLbl.Font = new System.Drawing.Font("SF Pro Text", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lenLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            this.lenLbl.Location = new System.Drawing.Point(253, 192);
+            this.lenLbl.Location = new System.Drawing.Point(250, 186);
             this.lenLbl.Name = "lenLbl";
             this.lenLbl.Size = new System.Drawing.Size(37, 19);
             this.lenLbl.TabIndex = 35;
@@ -191,7 +193,7 @@
             this.metroLabel12.CustomBackground = true;
             this.metroLabel12.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel12.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel12.Location = new System.Drawing.Point(213, 280);
+            this.metroLabel12.Location = new System.Drawing.Point(653, 186);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(34, 17);
             this.metroLabel12.Style = MetroFramework.MetroColorStyle.Teal;
@@ -208,7 +210,7 @@
             this.bunifuSeparator2.LineThickness = 2;
             this.bunifuSeparator2.Location = new System.Drawing.Point(164, 71);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(697, 10);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(802, 10);
             this.bunifuSeparator2.TabIndex = 33;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -217,6 +219,7 @@
             // 
             this.guessWrtxt.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.guessWrtxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guessWrtxt.Enabled = false;
             this.guessWrtxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.guessWrtxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.guessWrtxt.HintForeColor = System.Drawing.Color.Empty;
@@ -226,7 +229,7 @@
             this.guessWrtxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
             this.guessWrtxt.LineMouseHoverColor = System.Drawing.Color.Lavender;
             this.guessWrtxt.LineThickness = 3;
-            this.guessWrtxt.Location = new System.Drawing.Point(259, 226);
+            this.guessWrtxt.Location = new System.Drawing.Point(438, 178);
             this.guessWrtxt.Margin = new System.Windows.Forms.Padding(4);
             this.guessWrtxt.Name = "guessWrtxt";
             this.guessWrtxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -242,7 +245,7 @@
             this.metroLabel11.CustomBackground = true;
             this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel11.Location = new System.Drawing.Point(246, 388);
+            this.metroLabel11.Location = new System.Drawing.Point(335, 283);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(50, 24);
             this.metroLabel11.Style = MetroFramework.MetroColorStyle.Teal;
@@ -259,7 +262,7 @@
             this.metroLabel9.CustomBackground = true;
             this.metroLabel9.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel9.Location = new System.Drawing.Point(168, 236);
+            this.metroLabel9.Location = new System.Drawing.Point(347, 188);
             this.metroLabel9.Name = "metroLabel9";
             this.metroLabel9.Size = new System.Drawing.Size(83, 17);
             this.metroLabel9.Style = MetroFramework.MetroColorStyle.Teal;
@@ -279,11 +282,11 @@
             this.hintTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
             this.hintTxt.LineMouseHoverColor = System.Drawing.Color.Lavender;
             this.hintTxt.LineThickness = 4;
-            this.hintTxt.Location = new System.Drawing.Point(306, 388);
+            this.hintTxt.Location = new System.Drawing.Point(395, 283);
             this.hintTxt.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.hintTxt.Name = "hintTxt";
             this.hintTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.hintTxt.Size = new System.Drawing.Size(180, 33);
+            this.hintTxt.Size = new System.Drawing.Size(207, 33);
             this.hintTxt.TabIndex = 29;
             this.hintTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -293,11 +296,10 @@
             this.lifeMeterlbl.AutoSize = true;
             this.lifeMeterlbl.Font = new System.Drawing.Font("the dead saloon", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lifeMeterlbl.ForeColor = System.Drawing.Color.Teal;
-            this.lifeMeterlbl.Location = new System.Drawing.Point(253, 272);
+            this.lifeMeterlbl.Location = new System.Drawing.Point(693, 178);
             this.lifeMeterlbl.Name = "lifeMeterlbl";
-            this.lifeMeterlbl.Size = new System.Drawing.Size(30, 32);
+            this.lifeMeterlbl.Size = new System.Drawing.Size(0, 32);
             this.lifeMeterlbl.TabIndex = 26;
-            this.lifeMeterlbl.Text = "6";
             this.lifeMeterlbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // metroLabel10
@@ -308,7 +310,7 @@
             this.metroLabel10.CustomBackground = true;
             this.metroLabel10.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.metroLabel10.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel10.Location = new System.Drawing.Point(182, 344);
+            this.metroLabel10.Location = new System.Drawing.Point(271, 239);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(116, 24);
             this.metroLabel10.Style = MetroFramework.MetroColorStyle.Teal;
@@ -329,11 +331,11 @@
             this.wordTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
             this.wordTxt.LineMouseHoverColor = System.Drawing.Color.Lavender;
             this.wordTxt.LineThickness = 4;
-            this.wordTxt.Location = new System.Drawing.Point(306, 344);
+            this.wordTxt.Location = new System.Drawing.Point(395, 239);
             this.wordTxt.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.wordTxt.Name = "wordTxt";
             this.wordTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.wordTxt.Size = new System.Drawing.Size(180, 31);
+            this.wordTxt.Size = new System.Drawing.Size(207, 31);
             this.wordTxt.TabIndex = 27;
             this.wordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -348,7 +350,7 @@
             this.wordPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.wordPanel.Location = new System.Drawing.Point(164, 0);
             this.wordPanel.Name = "wordPanel";
-            this.wordPanel.Size = new System.Drawing.Size(697, 71);
+            this.wordPanel.Size = new System.Drawing.Size(802, 71);
             this.wordPanel.TabIndex = 21;
             // 
             // bunifuThinButton21
@@ -381,12 +383,13 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.flowLayoutPanel1.Controls.Add(this.metroRadioButton1);
             this.flowLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(861, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(966, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 443);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 494);
             this.flowLayoutPanel1.TabIndex = 20;
             // 
             // bunifuGradientPanel2
@@ -395,11 +398,8 @@
             this.bunifuGradientPanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bunifuGradientPanel2.Controls.Add(this.cncttxt);
             this.bunifuGradientPanel2.Controls.Add(this.cnctbtn);
-            this.bunifuGradientPanel2.Controls.Add(this.metroLabel6);
-            this.bunifuGradientPanel2.Controls.Add(this.metroLabel7);
+            this.bunifuGradientPanel2.Controls.Add(this.playStatuslbl);
             this.bunifuGradientPanel2.Controls.Add(this.materialDivider1);
-            this.bunifuGradientPanel2.Controls.Add(this.metroLabel3);
-            this.bunifuGradientPanel2.Controls.Add(this.metroLabel5);
             this.bunifuGradientPanel2.Controls.Add(this.metroLabel4);
             this.bunifuGradientPanel2.Controls.Add(this.currentPlayerLbl);
             this.bunifuGradientPanel2.Controls.Add(this.metroLabel2);
@@ -410,10 +410,10 @@
             this.bunifuGradientPanel2.GradientBottomRight = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.bunifuGradientPanel2.GradientTopLeft = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.bunifuGradientPanel2.GradientTopRight = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.bunifuGradientPanel2.Location = new System.Drawing.Point(164, 443);
+            this.bunifuGradientPanel2.Location = new System.Drawing.Point(164, 494);
             this.bunifuGradientPanel2.Name = "bunifuGradientPanel2";
             this.bunifuGradientPanel2.Quality = 10;
-            this.bunifuGradientPanel2.Size = new System.Drawing.Size(833, 114);
+            this.bunifuGradientPanel2.Size = new System.Drawing.Size(938, 66);
             this.bunifuGradientPanel2.TabIndex = 19;
             // 
             // cncttxt
@@ -429,7 +429,7 @@
             this.cncttxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
             this.cncttxt.LineMouseHoverColor = System.Drawing.Color.Lavender;
             this.cncttxt.LineThickness = 4;
-            this.cncttxt.Location = new System.Drawing.Point(16, 46);
+            this.cncttxt.Location = new System.Drawing.Point(11, 20);
             this.cncttxt.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cncttxt.Name = "cncttxt";
             this.cncttxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -440,86 +440,37 @@
             // cnctbtn
             // 
             this.cnctbtn.Depth = 0;
-            this.cnctbtn.Location = new System.Drawing.Point(206, 49);
+            this.cnctbtn.Location = new System.Drawing.Point(201, 27);
             this.cnctbtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.cnctbtn.Name = "cnctbtn";
             this.cnctbtn.Primary = true;
-            this.cnctbtn.Size = new System.Drawing.Size(156, 44);
+            this.cnctbtn.Size = new System.Drawing.Size(113, 30);
             this.cnctbtn.TabIndex = 18;
             this.cnctbtn.Text = "Connect";
             this.cnctbtn.UseVisualStyleBackColor = true;
             this.cnctbtn.Click += new System.EventHandler(this.cnctbtn_Click);
             // 
-            // metroLabel6
+            // playStatuslbl
             // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.metroLabel6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.metroLabel6.CustomBackground = true;
-            this.metroLabel6.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel6.Location = new System.Drawing.Point(740, 25);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(30, 24);
-            this.metroLabel6.TabIndex = 13;
-            this.metroLabel6.Text = "10";
-            this.metroLabel6.UseStyleColors = true;
-            // 
-            // metroLabel7
-            // 
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.metroLabel7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.metroLabel7.CustomBackground = true;
-            this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel7.Location = new System.Drawing.Point(657, 25);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(62, 24);
-            this.metroLabel7.TabIndex = 12;
-            this.metroLabel7.Text = "Score:";
-            this.metroLabel7.UseStyleColors = true;
+            this.playStatuslbl.AutoSize = true;
+            this.playStatuslbl.Font = new System.Drawing.Font("SF Mono", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playStatuslbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            this.playStatuslbl.Location = new System.Drawing.Point(831, 52);
+            this.playStatuslbl.Name = "playStatuslbl";
+            this.playStatuslbl.Size = new System.Drawing.Size(0, 19);
+            this.playStatuslbl.TabIndex = 1;
             // 
             // materialDivider1
             // 
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
             this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(0, 0);
+            this.materialDivider1.Font = new System.Drawing.Font("SF Pro Text", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialDivider1.Location = new System.Drawing.Point(1, 0);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
-            this.materialDivider1.Size = new System.Drawing.Size(832, 10);
+            this.materialDivider1.Size = new System.Drawing.Size(935, 2);
             this.materialDivider1.TabIndex = 18;
             this.materialDivider1.Text = "materialDivider1";
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.metroLabel3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.metroLabel3.CustomBackground = true;
-            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel3.Location = new System.Drawing.Point(740, 49);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(30, 24);
-            this.metroLabel3.TabIndex = 11;
-            this.metroLabel3.Text = "20";
-            this.metroLabel3.UseStyleColors = true;
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.metroLabel5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.metroLabel5.CustomBackground = true;
-            this.metroLabel5.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel5.Location = new System.Drawing.Point(587, 49);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(132, 24);
-            this.metroLabel5.TabIndex = 10;
-            this.metroLabel5.Text = "Highest Score:";
-            this.metroLabel5.UseStyleColors = true;
             // 
             // metroLabel4
             // 
@@ -527,11 +478,11 @@
             this.metroLabel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.metroLabel4.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroLabel4.CustomBackground = true;
-            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel4.Location = new System.Drawing.Point(519, 60);
+            this.metroLabel4.Location = new System.Drawing.Point(731, 37);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(36, 24);
+            this.metroLabel4.Size = new System.Drawing.Size(26, 17);
             this.metroLabel4.TabIndex = 9;
             this.metroLabel4.Text = "Me";
             this.metroLabel4.UseStyleColors = true;
@@ -542,13 +493,12 @@
             this.currentPlayerLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.currentPlayerLbl.Cursor = System.Windows.Forms.Cursors.Default;
             this.currentPlayerLbl.CustomBackground = true;
-            this.currentPlayerLbl.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.currentPlayerLbl.FontSize = MetroFramework.MetroLabelSize.Small;
             this.currentPlayerLbl.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.currentPlayerLbl.Location = new System.Drawing.Point(519, 25);
+            this.currentPlayerLbl.Location = new System.Drawing.Point(731, 20);
             this.currentPlayerLbl.Name = "currentPlayerLbl";
-            this.currentPlayerLbl.Size = new System.Drawing.Size(76, 24);
+            this.currentPlayerLbl.Size = new System.Drawing.Size(0, 0);
             this.currentPlayerLbl.TabIndex = 8;
-            this.currentPlayerLbl.Text = "Zoomer";
             this.currentPlayerLbl.UseStyleColors = true;
             // 
             // metroLabel2
@@ -557,11 +507,11 @@
             this.metroLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.metroLabel2.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroLabel2.CustomBackground = true;
-            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(378, 60);
+            this.metroLabel2.Location = new System.Drawing.Point(590, 40);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(135, 24);
+            this.metroLabel2.Size = new System.Drawing.Size(92, 17);
             this.metroLabel2.TabIndex = 7;
             this.metroLabel2.Text = "Current Player:";
             this.metroLabel2.UseStyleColors = true;
@@ -572,11 +522,11 @@
             this.metroLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.metroLabel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.metroLabel1.CustomBackground = true;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel1.Location = new System.Drawing.Point(378, 25);
+            this.metroLabel1.Location = new System.Drawing.Point(590, 15);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(135, 24);
+            this.metroLabel1.Size = new System.Drawing.Size(92, 17);
             this.metroLabel1.TabIndex = 6;
             this.metroLabel1.Text = "Current Player:";
             this.metroLabel1.UseStyleColors = true;
@@ -585,11 +535,11 @@
             // 
             this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
             this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel1.Controls.Add(this.picturepnl);
             this.bunifuGradientPanel1.Controls.Add(this.materialLabel1);
             this.bunifuGradientPanel1.Controls.Add(this.nameTxt);
             this.bunifuGradientPanel1.Controls.Add(this.HostBtn);
             this.bunifuGradientPanel1.Controls.Add(this.playBTN);
-            this.bunifuGradientPanel1.Controls.Add(this.pictureBox1);
             this.bunifuGradientPanel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.bunifuGradientPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.bunifuGradientPanel1.GradientBottomLeft = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(198)))), ((int)(((byte)(197)))));
@@ -599,8 +549,86 @@
             this.bunifuGradientPanel1.Location = new System.Drawing.Point(0, 0);
             this.bunifuGradientPanel1.Name = "bunifuGradientPanel1";
             this.bunifuGradientPanel1.Quality = 10;
-            this.bunifuGradientPanel1.Size = new System.Drawing.Size(164, 557);
+            this.bunifuGradientPanel1.Size = new System.Drawing.Size(164, 560);
             this.bunifuGradientPanel1.TabIndex = 18;
+            // 
+            // picturepnl
+            // 
+            this.picturepnl.BackColor = System.Drawing.Color.Transparent;
+            this.picturepnl.Controls.Add(this.HG5);
+            this.picturepnl.Controls.Add(this.HG3);
+            this.picturepnl.Controls.Add(this.HG4);
+            this.picturepnl.Controls.Add(this.HG2);
+            this.picturepnl.Controls.Add(this.HG1);
+            this.picturepnl.Location = new System.Drawing.Point(3, 3);
+            this.picturepnl.Name = "picturepnl";
+            this.picturepnl.Size = new System.Drawing.Size(155, 402);
+            this.picturepnl.TabIndex = 7;
+            // 
+            // HG5
+            // 
+            this.HG5.BackColor = System.Drawing.Color.Transparent;
+            this.HG5.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.HG5.Image = global::NP_Hangman.Properties.Resources.leg_left;
+            this.HG5.Location = new System.Drawing.Point(97, 208);
+            this.HG5.Name = "HG5";
+            this.HG5.Size = new System.Drawing.Size(47, 189);
+            this.HG5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.HG5.TabIndex = 38;
+            this.HG5.TabStop = false;
+            this.HG5.Visible = false;
+            // 
+            // HG3
+            // 
+            this.HG3.BackColor = System.Drawing.Color.Transparent;
+            this.HG3.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.HG3.Image = global::NP_Hangman.Properties.Resources.body;
+            this.HG3.Location = new System.Drawing.Point(17, 128);
+            this.HG3.Name = "HG3";
+            this.HG3.Size = new System.Drawing.Size(128, 85);
+            this.HG3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.HG3.TabIndex = 19;
+            this.HG3.TabStop = false;
+            this.HG3.Visible = false;
+            // 
+            // HG4
+            // 
+            this.HG4.BackColor = System.Drawing.Color.Transparent;
+            this.HG4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.HG4.Image = global::NP_Hangman.Properties.Resources.leg_right;
+            this.HG4.Location = new System.Drawing.Point(8, 208);
+            this.HG4.Name = "HG4";
+            this.HG4.Size = new System.Drawing.Size(89, 186);
+            this.HG4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.HG4.TabIndex = 37;
+            this.HG4.TabStop = false;
+            this.HG4.Visible = false;
+            // 
+            // HG2
+            // 
+            this.HG2.BackColor = System.Drawing.Color.Transparent;
+            this.HG2.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.HG2.Image = global::NP_Hangman.Properties.Resources.headnoose;
+            this.HG2.Location = new System.Drawing.Point(-6, 38);
+            this.HG2.Name = "HG2";
+            this.HG2.Size = new System.Drawing.Size(195, 124);
+            this.HG2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.HG2.TabIndex = 17;
+            this.HG2.TabStop = false;
+            this.HG2.Visible = false;
+            // 
+            // HG1
+            // 
+            this.HG1.BackColor = System.Drawing.Color.Transparent;
+            this.HG1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.HG1.Image = global::NP_Hangman.Properties.Resources.hangmans_noose_png_by_mysticmorning_d4ns3ak;
+            this.HG1.Location = new System.Drawing.Point(45, -23);
+            this.HG1.Name = "HG1";
+            this.HG1.Size = new System.Drawing.Size(113, 102);
+            this.HG1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.HG1.TabIndex = 18;
+            this.HG1.TabStop = false;
+            this.HG1.Visible = false;
             // 
             // materialLabel1
             // 
@@ -610,7 +638,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(57, 384);
+            this.materialLabel1.Location = new System.Drawing.Point(55, 409);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(49, 19);
@@ -630,7 +658,7 @@
             this.nameTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
             this.nameTxt.LineMouseHoverColor = System.Drawing.Color.Transparent;
             this.nameTxt.LineThickness = 5;
-            this.nameTxt.Location = new System.Drawing.Point(17, 409);
+            this.nameTxt.Location = new System.Drawing.Point(15, 434);
             this.nameTxt.Margin = new System.Windows.Forms.Padding(4);
             this.nameTxt.Name = "nameTxt";
             this.nameTxt.Size = new System.Drawing.Size(128, 33);
@@ -640,7 +668,7 @@
             // HostBtn
             // 
             this.HostBtn.Depth = 0;
-            this.HostBtn.Location = new System.Drawing.Point(17, 492);
+            this.HostBtn.Location = new System.Drawing.Point(15, 517);
             this.HostBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.HostBtn.Name = "HostBtn";
             this.HostBtn.Primary = true;
@@ -653,7 +681,7 @@
             // playBTN
             // 
             this.playBTN.Depth = 0;
-            this.playBTN.Location = new System.Drawing.Point(17, 455);
+            this.playBTN.Location = new System.Drawing.Point(15, 480);
             this.playBTN.MouseState = MaterialSkin.MouseState.HOVER;
             this.playBTN.Name = "playBTN";
             this.playBTN.Primary = true;
@@ -662,18 +690,6 @@
             this.playBTN.Text = "play";
             this.playBTN.UseVisualStyleBackColor = true;
             this.playBTN.Click += new System.EventHandler(this.playBTN_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.pictureBox1.Image = global::NP_Hangman.Properties.Resources.pose_mask_2;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 14);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 354);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 17;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -687,12 +703,27 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Hangman";
             // 
+            // bunifuElipse1
+            // 
+            this.bunifuElipse1.ElipseRadius = 30;
+            this.bunifuElipse1.TargetControl = this;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(780, 121);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(180, 322);
+            this.textBox1.TabIndex = 37;
+            // 
             // Hangman
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1051, 619);
+            this.ClientSize = new System.Drawing.Size(1156, 622);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Parent_pnl);
             this.DisplayHeader = false;
@@ -713,11 +744,18 @@
             this.Parent_pnl.ResumeLayout(false);
             this.Parent_pnl.PerformLayout();
             this.wordPanel.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.bunifuGradientPanel2.ResumeLayout(false);
             this.bunifuGradientPanel2.PerformLayout();
             this.bunifuGradientPanel1.ResumeLayout(false);
             this.bunifuGradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.picturepnl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.HG5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HG1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -727,10 +765,6 @@
 
         private MetroFramework.Controls.MetroPanel Parent_pnl;
         private Bunifu.Framework.UI.BunifuGradientPanel bunifuGradientPanel2;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
-        private MetroFramework.Controls.MetroLabel metroLabel7;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel currentPlayerLbl;
         private MetroFramework.Controls.MetroLabel metroLabel2;
@@ -742,7 +776,7 @@
         private Bunifu.Framework.UI.BunifuMaterialTextbox nameTxt;
         private MaterialSkin.Controls.MaterialRaisedButton HostBtn;
         private MaterialSkin.Controls.MaterialRaisedButton playBTN;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox HG2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private MetroFramework.Controls.MetroRadioButton metroRadioButton1;
         private MetroFramework.Controls.MetroLabel metroLabel10;
@@ -762,6 +796,13 @@
         private MaterialSkin.Controls.MaterialRaisedButton cnctbtn;
         private System.Windows.Forms.Label playStatuslbl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox HG1;
+        private System.Windows.Forms.PictureBox HG3;
+        private System.Windows.Forms.PictureBox HG4;
+        private System.Windows.Forms.PictureBox HG5;
+        private System.Windows.Forms.Panel picturepnl;
+        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

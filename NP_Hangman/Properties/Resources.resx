@@ -118,76 +118,94 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="background_dots_shadow_spot_50673_1280x960" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\background_dots_shadow_spot_50673_1280x960.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wallpaperflare.com_wallpapesadr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wallpaperflare.com_wallpapesadr.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="zsasfafs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zsasfafs.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glare_circles_colorful_bright_background_47419_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glare_circles_colorful_bright_background_47419_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background_texture_surface_dark_50699_1280x960" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\background_texture_surface_dark_50699_1280x960.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="black_background_pattern_light_texture_55291_1024x768" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\black_background_pattern_light_texture_55291_1024x768.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glare_light_shape_bright_46585_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glare_light_shape_bright_46585_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="overlapping-blue-and-silver-triangles-26049-1920x1200" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\overlapping-blue-and-silver-triangles-26049-1920x1200.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="wallpaperflare.com_wallpaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wallpaperflare.com_wallpaper.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="patterns-blue-white-hd-wallpaper-1080p" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\patterns-blue-white-hd-wallpaper-1080p.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="asfas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\asfas.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="music" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\music.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pattern_background_spot_74877_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pattern_background_spot_74877_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sdad" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sdad.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="diamond-background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\diamond-background1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="glare_colorful_abstract_106186_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glare_colorful_abstract_106186_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="surface_texture_stains_background_50906_1280x960" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\surface_texture_stains_background_50906_1280x960.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="paper" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\paper.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="aaaa" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\aaaa.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="wallpaperflare.com_wallpapesadr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wallpaperflare.com_wallpapesadr.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="surface_spot_dark_texture_50554_1920x1200" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\surface_spot_dark_texture_50554_1920x1200.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="glare_light_shape_bright_46585_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glare_light_shape_bright_46585_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sda" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sda.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="patterns-blue-white-hd-wallpaper-1080p" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\patterns-blue-white-hd-wallpaper-1080p.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="background_bumps_light_86951_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\background_bumps_light_86951_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="surface_texture_stains_background_50906_1280x960" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\surface_texture_stains_background_50906_1280x960.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wallpaperflare.com_wallpaper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wallpaperflare.com_wallpaper.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background_dots_shadow_spot_50673_1280x960" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background_dots_shadow_spot_50673_1280x960.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glare_colorful_abstract_106186_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glare_colorful_abstract_106186_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="asfas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\asfas.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leg left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\leg left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="space_astronauts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\space_astronauts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="aaaa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aaaa.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="diamond-background1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\diamond-background1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hangmans_noose_png_by_mysticmorning_d4ns3ak" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hangmans_noose_png_by_mysticmorning_d4ns3ak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background_bumps_light_86951_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background_bumps_light_86951_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pose-mask-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\peeps\pose-mask-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="surface_spot_dark_texture_50554_1920x1200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\surface_spot_dark_texture_50554_1920x1200.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pose-mask-21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pose-mask-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_background_pattern_light_texture_55291_1024x768" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\black_background_pattern_light_texture_55291_1024x768.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background_texture_surface_dark_50699_1280x960" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background_texture_surface_dark_50699_1280x960.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pattern_background_spot_74877_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pattern_background_spot_74877_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leg right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\leg right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sda.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="glare_circles_colorful_bright_background_47419_1920x1080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glare_circles_colorful_bright_background_47419_1920x1080.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sdad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sdad.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="body" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\body.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="headnoose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\headnoose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

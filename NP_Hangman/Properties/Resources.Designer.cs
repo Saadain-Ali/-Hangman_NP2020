@@ -123,6 +123,16 @@ namespace NP_Hangman.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap body {
+            get {
+                object obj = ResourceManager.GetObject("body", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap diamond_background1 {
             get {
                 object obj = ResourceManager.GetObject("diamond-background1", resourceCulture);
@@ -156,6 +166,46 @@ namespace NP_Hangman.Properties {
         internal static System.Drawing.Bitmap glare_light_shape_bright_46585_1920x1080 {
             get {
                 object obj = ResourceManager.GetObject("glare_light_shape_bright_46585_1920x1080", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hangmans_noose_png_by_mysticmorning_d4ns3ak {
+            get {
+                object obj = ResourceManager.GetObject("hangmans_noose_png_by_mysticmorning_d4ns3ak", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap headnoose {
+            get {
+                object obj = ResourceManager.GetObject("headnoose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap leg_left {
+            get {
+                object obj = ResourceManager.GetObject("leg left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap leg_right {
+            get {
+                object obj = ResourceManager.GetObject("leg right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +266,16 @@ namespace NP_Hangman.Properties {
         internal static System.Drawing.Bitmap pose_mask_2 {
             get {
                 object obj = ResourceManager.GetObject("pose-mask-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pose_mask_21 {
+            get {
+                object obj = ResourceManager.GetObject("pose-mask-21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -115,6 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\headnoose.png" />
+    <None Include="Resources\leg left.png" />
+    <None Include="Resources\leg right.png" />
+    <None Include="Resources\body.png" />
+    <None Include="Resources\hangmans_noose_png_by_mysticmorning_d4ns3ak.png" />
+    <None Include="Resources\pose-mask-2.png" />
     <None Include="Resources\peeps\pose-mask-2.png" />
     <None Include="Resources\zsasfafs.jpeg" />
     <None Include="Resources\wallpaperflare.com_wallpapesadr.jpg" />

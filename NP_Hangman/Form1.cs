@@ -29,6 +29,20 @@ namespace NP_Hangman
         TcpClient activeClient;
         bool isPlaying = false;
         bool isGuessing = false;
+        bool CTC = false; //client to Client
+        int lifeCounter = 0;
+
+        bool isHost = false;
+
+        /// <summary> FOR CLIENT SIDE ONLY
+        TcpClient PlayerForClient;
+        string chosenClient = "";
+        bool clientChosen = false;
+        string clientName ;
+        NetworkStream hostStream;
+        /// </summary>
+
+
 
         public Hangman()
         {
@@ -39,6 +53,7 @@ namespace NP_Hangman
         private void playBTN_Click(object sender, EventArgs e)
         {
             messageCmnt.Text = "";
+             //validations checking
             if (nameTxt.Text.Trim(' ') == "")
             {
                 nameTxt.LineIdleColor = Color.Red;
@@ -53,39 +68,41 @@ namespace NP_Hangman
             }
             else
             {
-                isGuessing = false;
+                isGuessing = false; // keyboard background listening is off for the stater
+                word = wordTxt.Text.Trim().ToUpper();
+                // if the host is the starter
                 if (isHost)
                 {
-                    //send request to the active client
-                    nameTxt.LineIdleColor = Color.FromArgb(64, 64, 64);
-                    wordTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
-                    hintTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
-                    int lenTxt = Convert.ToInt32(wordTxt.Text.Length);
-                    lenLbl.Text = wordTxt.Text.Length.ToString();
-                    word = wordTxt.Text.ToUpper();
-                    wordInitiator(word.Length);
-                    guessWrtxt.ResetText();
-                    sendToClient("play," + word ,activeClient);
-
+                   
+                    //a request is sent to the guesser
+                    sendToClient("play," + word, activeClient);
+                }
+                else
+                {
+                    // means it wants to play with the host
+                    if (clientChosen)
+                    {
+                        if (chosenClient == "Host\r\n")
+                        {
+                            clientWriter("play,"+ word);
+                        }
+                        else
+                        {
+                            clientWriter("playClient,"+ nameTxt.Text + "\r\n," + chosenClient + "," + word); // this means client wants to play with other client
+                        }
+                    }
                 }
 
-
-                //code here if client want to playe as startrer
-                //isPlaying = true;
-                //KeyPreview = true;
-                //nameTxt.LineIdleColor = Color.FromArgb(64, 64, 64);
-                //wordTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
-                //hintTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
-                //int lenTxt = Convert.ToInt32(wordTxt.Text.Length);
-                //maxWrongGuess = lenTxt / 2;
-                //lenLbl.Text = wordTxt.Text.Length.ToString();
-                //word = wordTxt.Text.ToUpper();
-                //guessWrtxt.ResetText();
             }
         }
 
 
-
+        private void clientWriter(string msg)
+        {
+            StreamWriter sw = new StreamWriter(hostStream);
+            sw.WriteLine(msg);
+            sw.Flush();
+        }
 
 
 
@@ -99,37 +116,128 @@ namespace NP_Hangman
         {
             TcpListener listener = (TcpListener)ar.AsyncState;
             TcpClient client = listener.EndAcceptTcpClient(ar);
-            clients.Add(client);
 
-            //generate checkboxes for new clients
-            MetroRadioButton chkBox = checkBoxMaker(clients.Count.ToString());
+            clients.Add(client); //maintain clients count
+            activeClient = client; // new client is made active client by default
+            
+            
 
-            activeClient = client;
+           
             NetworkStream ns = client.GetStream();
-            object[] a = new object[2];
+            object[] a = new object[2];                              
             a[0] = ns;
             a[1] = client;
+
+            //to start reading form the client
             ns.BeginRead(b, 0, b.Length, new AsyncCallback(ReadMsg), a);
+
+
             listener.BeginAcceptTcpClient(new AsyncCallback(ClientConnect), listener);
         }
         private void ReadMsg(IAsyncResult ar)
         {
 
-            if (isHost)
+            if (isHost) //serverside recvmsg
             {
                 object[] a = (object[])ar.AsyncState;
                 NetworkStream ns = (NetworkStream)a[0];
-                TcpClient client = (TcpClient)a[1];
+                TcpClient client = (TcpClient)a[1]; //a[1] is client sent from ns.BeginRead from above
                 int count = ns.EndRead(ar);
-                string data = ASCIIEncoding.ASCII.GetString(b, 0, count);
+                string data = ASCIIEncoding.ASCII.GetString(b, 0, count); // store the recieved data
+
                 string[] msg = data.Split(',');
+
+                //the first message the server would recieve is the name of the client
                 if (msg[0].Contains("@name@"))
                 {
                     string name = msg[0].Replace("@name@", "");
-                    lstClients.Add(name + lstClients.Count, client);
+
                     messageCmnt.Text = msg[1] + "Connected";
+
+                    //generate checkboxes for new clients
+                    MetroCheckBox chkBox = checkBoxMaker(msg[1]);
+
                     //wordInitiator(Convert.ToInt32(msg[1]));
+                    //this is the first confirmation msg from server with prefix "wc" ie welcome
                     sendToClient("wc,You are connected to " + nameTxt.Text, client);
+
+                    //to send already connected clients to the new client
+                    //String ClientsToSend = "";
+                    //foreach (String item in lstClients.Keys)
+                    //{
+                    //    ClientsToSend += item + "~";
+                    //}
+
+                    // sendToClient("CCL," + ClientsToSend + "Host", client); //send already connected clients list to new client
+                    
+                    lstClients.Add(msg[1], client); //name and client is stored in dictionary
+                    sendClientCLlist();
+                }
+                else if (msg[0].Contains("playClient")) //player vs player
+                {
+                    TcpClient play1 = lstClients[msg[1]]; //player 1;
+                    TcpClient play2 = lstClients[msg[2]]; //       player2  lstClients.Keys.Where((x) => x.Contains(msg[1]));
+                    //NetworkStream p2Stream =  play2.GetStream();
+                    //StreamWriter sw = new StreamWriter(p2Stream);
+                    //sw.Write(:);
+                                             //p1           //p2        //word 
+                    sendToClient("playC2C," +msg[1] + "," + msg[2] +"," +msg[3], play2);
+                }
+                else if(msg[0]=="PVPplayyes")
+                {
+                    TcpClient play1 = lstClients[msg[1]]; 
+                    TcpClient play2 = lstClients[msg[2]]; 
+                    sendToClient("PVPplayyes," + "," + msg[2] + "," + msg[3], play1);
+                }
+                else if (msg[0] == "play" )
+                {
+                    DialogResult ans = MessageBox.Show("You have play request! Start Game " , "Request", MessageBoxButtons.YesNo);
+                    if (ans == DialogResult.Yes)
+                    {
+                        StreamWriter sw = new StreamWriter(ns);
+                        activeClient = client;
+                        
+                        //this is the first message to the server 
+                        sw.WriteLine("playyes," + nameTxt.Text);
+                        sw.Flush();
+                        reseter();
+                        picturePnlReseter();
+                        word = msg[1].Remove(msg[1].Length - 2, 2);
+                        isGuessing = true;
+                        lifeMeterlbl.Text = "5";
+                        this.KeyPreview = true;
+                        isPlaying = true;
+                        lenLbl.Text = word.Length.ToString();
+                        wordInitiator(word.Length);
+                        Thread.Sleep(1500);
+                    }
+                    else
+                    {
+                        StreamWriter sw = new StreamWriter(ns);
+
+                        //this is the first message to the server 
+                        sw.WriteLine("playno," + nameTxt.Text);
+                        sw.Flush();
+
+                    }
+                }
+                else if (msg[0].Contains("playno"))
+                {
+                    playApprove = false;
+                    MessageBox.Show("Request is denied");
+
+                }
+                else if (msg[0].Contains("playyes"))
+                {
+                    playApprove = true;
+                    startPlay();
+                }
+                else if (msg[0]== "PVPguess")
+                {
+                    TcpClient play1 = lstClients[msg[1]];
+                    TcpClient play2 = lstClients[msg[2]];
+                    sendToClient( msg[3] + "," + msg[2], play1);
+                    //sendToClient("PVPcheck" + msg[3] + "," + msg[2], play1);
                 }
                 else
                 {
@@ -143,29 +251,98 @@ namespace NP_Hangman
                 }
                 ns.BeginRead(b, 0, b.Length, new AsyncCallback(ReadMsg), a);
             }
-            else
+            else //clientSide Readmsg
             {
+                
                 NetworkStream ns = (NetworkStream)ar.AsyncState;
+                hostStream = ns;
                 int count = ns.EndRead(ar);
-                string data = ASCIIEncoding.ASCII.GetString(b, 0, count);
-                string[] msg = data.Split(',');
+                string data = ASCIIEncoding.ASCII.GetString(b, 0, count); //recieving data
+                string[] msg = data.Split(','); // msg[0] is prefix like wc , play etc
+
+
                 if (msg[0].Contains("wc"))
                 {
-                    messageCmnt.Text = msg[1];
+                    messageCmnt.Text = msg[1]; //welcome msg from server
                 }
-                else if (msg[0].Contains("play"))
+                else if (msg[0].Contains("CCL"))
+                {
+                    string clientsNames = msg[1];
+                    if (clientsNames != "")
+                    {
+                        string[] Temp = clientsNames.Split('~');
+                        flowLayoutPanel1.Controls.Clear();
+                        for (int i = 0; i < Temp.Length; i++)
+                        {
+                            if (nameTxt.Text != Temp[i].Remove(Temp[i].Length - 2))
+                            {
+                                MetroCheckBox chkBox = checkBoxMaker(Temp[i]);
+                            }
+                            
+                        }
+                    }
+                }
+                else if (msg[0].Contains("playC2C"))
+                {
+                    PVPStart(msg);
+                    //TcpClient play1 = lstClients[msg[1]]; //player 1;
+                    //TcpClient play2 = lstClients[msg[2]];
+                    //yaha client to client kaam hoga sara
+                }
+                else if (msg[0] == "play")
                 {
                     DialogResult ans =  MessageBox.Show("You have play request! Start Game","Request",MessageBoxButtons.YesNo);
                     if (ans == DialogResult.Yes)
                     {
+                        StreamWriter sw = new StreamWriter(ns);
+
+                        //this is the first message to the server 
+                        sw.WriteLine("playyes," + nameTxt.Text);
+                        sw.Flush();
+
+                        reseter();                        //Reseting Panels
+                        picturePnlReseter();              //
+
+                        word = msg[1].Remove(msg[1].Length - 2, 2);
                         isGuessing = true;
+                        lifeMeterlbl.Text = "5";
                         this.KeyPreview = true;
                         isPlaying = true;
-                        word = msg[1].Remove(msg[1].Length - 2, 2);
+                        lenLbl.Text = word.Length.ToString();
                         wordInitiator(word.Length);
                         Thread.Sleep(1500);
                     }
-                   
+                    else
+                    {
+                        StreamWriter sw = new StreamWriter(ns);
+                        sw.WriteLine("playno," + nameTxt.Text);
+                        sw.Flush();
+                    }
+                }
+                else if (msg[0]== "PVPplayyes")
+                {
+                    playApprove = true;
+                    startPlay();
+                }
+                else if (msg[0] == "playno" || msg[0] == "PVPplayno")
+                {
+                    playApprove = false;
+                    MessageBox.Show("Request is denied");
+                }
+                else if (msg[0]== "playyes")
+                {
+                    playApprove = true;
+                    startPlay();
+                }
+                else //if there is no prefix then it must be a pressed key
+                {
+                    // recieved msg is here !!! keys from A to Z
+                    //pressed = msg[0];
+                    char letter = Convert.ToChar(msg[0][0]);
+                    if (((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z')) && !pressed.Contains(letter))
+                    {
+                        checker(letter);
+                    }
                 }
                 ns.BeginRead(b, 0, b.Length, ReadMsg, ns);
             }
@@ -176,27 +353,73 @@ namespace NP_Hangman
 
         }
 
+        string player1 = "";
+        string player2 = "";
+        bool isPVP = false;
+
+        private void PVPStart(string[] msg)
+        {
+            player1 = msg[1];
+            player2 = msg[2];
+            //confimation
+
+            DialogResult ans = MessageBox.Show("You have play request! Start Game", "Request", MessageBoxButtons.YesNo);
+            if (ans == DialogResult.Yes)
+            {
+               
+                StreamWriter sw = new StreamWriter(hostStream);
+                //this is the first message to the server 
+                sw.WriteLine("PVPplayyes," + player1 + "," + player2 + "," + msg[3]);
+                sw.Flush();
+
+                reseter();                        //Reseting Panels
+                picturePnlReseter();              //
+                isPVP = true;
+                word = msg[3].Remove(msg[3].Length - 2, 2);
+                isGuessing = true;
+                lifeMeterlbl.Text = "5";
+                this.KeyPreview = true;
+                isPlaying = true;
+                lenLbl.Text = word.Length.ToString();
+                wordInitiator(word.Length);
+                Thread.Sleep(1500);
+            }
+            else
+            {
+                StreamWriter sw = new StreamWriter(hostStream);
+                sw.WriteLine("PVPplayno," + nameTxt.Text);
+                sw.Flush();
+            }
+
+        }
+
+        private void startPlay()
+        {
+            foreach (PictureBox item in picturepnl.Controls)
+                item.Hide();
+            MessageBox.Show("Game is Starting");
+            if (playApprove)
+            {
+                //validations
+                nameTxt.LineIdleColor = Color.FromArgb(64, 64, 64);
+                wordTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
+                hintTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
+
+
+                int lenTxt = Convert.ToInt32(wordTxt.Text.Length);
+                lenLbl.Text = wordTxt.Text.Length.ToString();
+                lifeMeterlbl.Text = maxWrongGuess.ToString();
+                word = wordTxt.Text.Trim().ToUpper();
 
 
 
 
+                //To populate and display the chosen words on display wordpanel on the top
+                wordInitiator(word.Length);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                guessWrtxt.ResetText();
+            }
+        }
 
 
 
@@ -268,7 +491,15 @@ namespace NP_Hangman
 
                     if (((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z')) && !pressed.Contains(letter))
                     {
-                        sendToClient(letter.ToString(),client);
+                        if (isPVP)
+                        {
+                            clientWriter("PVPguess," + player1 + "," + player2+ "," +letter.ToString());
+                        }
+                        else
+                        {
+                            sendToClient(letter.ToString(), client);
+                        }
+                        
                         //guessWrtxt.Text += e.KeyData.ToString();
                         guesser(letter);
                     }
@@ -296,18 +527,22 @@ namespace NP_Hangman
                 }
                 if (rightGuess.Length == word.Length)
                 {
-                    messageCmnt.Text = "You Lost :( ";
+                    messageCmnt.Text = "You Lost :( ";   //GUesser wins
 
                     reseter();
                 }
             }
             else
             {
+                lifeCounter++;
                 guessWrtxt.Text += letter.ToString();
-                if (guessWrtxt.Text.Length >= maxWrongGuess)
+                lifeMeterlbl.Text = (maxWrongGuess - lifeCounter).ToString();
+                int index = picturepnl.Controls.IndexOfKey("HG"+(lifeCounter).ToString());
+                picturepnl.Controls[index].Visible = true;
+                if (lifeCounter >= maxWrongGuess)
                 {
                     isPlaying = false;
-                    messageCmnt.Text = "You Win :)";
+                    messageCmnt.Text = "You Win :)";  //starter wins //guesser lost
                     reseter();
                 }
             }
@@ -336,7 +571,12 @@ namespace NP_Hangman
             }
             else
             {
+                lifeCounter++;
                 guessWrtxt.Text += letter.ToString();
+                lifeMeterlbl.Text = (maxWrongGuess - lifeCounter).ToString();
+                int index = picturepnl.Controls.IndexOfKey("HG" + (lifeCounter).ToString());
+                picturepnl.Controls[index].Visible = true;
+                //picturepnl.Controls[(guessWrtxt.Text.Length) - 1].Visible = true;
                 if (guessWrtxt.Text.Length >= maxWrongGuess)
                 {
                     isPlaying = false;
@@ -355,16 +595,31 @@ namespace NP_Hangman
 
         private void reseter()
         {
+            isPVP = false;
+            isPlaying = false;
+            lifeCounter = 0;
+            isGuessing = false;
             guessWrtxt.ResetText();
-          
+            playApprove = false;
+            lifeMeterlbl.ResetText();
             lenLbl.ResetText();
             hintTxt.ResetText();
             wordTxt.ResetText();
+            guessWrtxt.ResetText();
             word = rightGuess = "";
             maxWrongGuess = 5 ;
             btns.Clear();
             KeyPreview = false;
             isPlaying = false;
+            pressed = "";
+        }
+
+        private void picturePnlReseter()
+        {
+            foreach (PictureBox item in picturepnl.Controls)
+            {
+                item.Hide();
+            }
         }
 
         private void Lost()
@@ -373,11 +628,11 @@ namespace NP_Hangman
         }
        
 
-        List<MetroRadioButton> boxes = new List<MetroRadioButton>();
-        public MetroRadioButton checkBoxMaker(string name)
+        List<MetroCheckBox> boxes = new List<MetroCheckBox>();
+        public MetroCheckBox checkBoxMaker(string name)
         {
 
-            MetroRadioButton chkbox = new MetroRadioButton();
+            MetroCheckBox  chkbox = new MetroCheckBox();
 
             chkbox.AutoSize = true;
             chkbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -386,17 +641,18 @@ namespace NP_Hangman
             chkbox.FontSize = MetroFramework.MetroLinkSize.Tall;
             chkbox.FontWeight = MetroFramework.MetroLinkWeight.Bold;
             chkbox.ForeColor = System.Drawing.Color.Transparent;
-            chkbox.Location = new System.Drawing.Point(735, 401);
+            //chkbox.Location = new System.Drawing.Point(735, 401);
             chkbox.Margin = new System.Windows.Forms.Padding(15, 20, 15, 15);
             chkbox.Name = "CBtn" + name;
             chkbox.Size = new System.Drawing.Size(95, 24);
             chkbox.Style = MetroFramework.MetroColorStyle.Teal;
             chkbox.TabIndex = 17;
             chkbox.TabStop = true;
+            chkbox.Checked = isHost ? true: false ;
             chkbox.Text = name;
             chkbox.UseStyleColors = true;
             chkbox.UseVisualStyleBackColor = true;
-            //chkbox.CheckedChanged += new System.EventHandler(this.metroRadioButton1_CheckedChanged);
+            chkbox.CheckedChanged += new System.EventHandler(this.metroRadioButton1_CheckedChanged);
 
             boxes.Add(chkbox);
             this.BeginInvoke((Action)(() =>
@@ -407,16 +663,21 @@ namespace NP_Hangman
             return chkbox;
         }
 
-        bool isHost = false;
 
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
             isHost = true;
-            cnctbtn.Enabled = cncttxt.Enabled = false;
+            nameTxt.Enabled = false;
+            //cnctbtn.Enabled = cncttxt.Enabled = false;
+            cnctbtn.Hide();
+            cncttxt.Hide();
             CheckForIllegalCrossThreadCalls = false;
-            TcpListener listener = new TcpListener(IPAddress.Loopback, 11000);
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+            IPAddress ipAddress = ipHostInfo.AddressList[1];
+            //TcpListener listener = new TcpListener(IPAddress.Loopback, 11000);
+            TcpListener listener = new TcpListener(ipAddress,11000);
             listener.Start(10);
-            playStatuslbl.Text = "SERVER";
+            playStatuslbl.Text = ipHostInfo.AddressList[1].ToString();
             listener.BeginAcceptTcpClient(new AsyncCallback(ClientConnect), listener);
         }
 
@@ -424,12 +685,32 @@ namespace NP_Hangman
         {
             foreach (var item in clients)
             {
-            //    textBox1.AppendText(Environment.NewLine);
-            //    textBox1.AppendText("Me: " + textBox3.Text);
-            //    NetworkStream stream = item.GetStream();
-            //    StreamWriter sdr = new StreamWriter(stream);
-            //    sdr.WriteLine(textBox3.Text);
-            //    sdr.Flush();
+                NetworkStream stream = activeClient.GetStream();
+                StreamWriter sdr = new StreamWriter(stream);
+                sdr.WriteLine("Leave");
+                sdr.Flush();
+                //    textBox1.AppendText(Environment.NewLine);
+                //    textBox1.AppendText("Me: " + textBox3.Text);
+                //    NetworkStream stream = item.GetStream();
+                //    StreamWriter sdr = new StreamWriter(stream);
+                //    sdr.WriteLine(textBox3.Text);
+                //    sdr.Flush();
+            }
+        }
+
+        private void sendClientCLlist()
+        {
+            String ClientsToSend = "";
+            foreach (String item in lstClients.Keys)
+            {
+                ClientsToSend += item + "~";
+            }
+            foreach (var item in clients)
+            {
+                NetworkStream stream = item.GetStream();
+                StreamWriter sdr = new StreamWriter(stream);
+                sdr.WriteLine("CCL," + ClientsToSend + "Host");
+                sdr.Flush();
             }
         }
 
@@ -446,6 +727,8 @@ namespace NP_Hangman
 
         byte[] clientb = new byte[1024];
         TcpClient client = new TcpClient();
+        private bool playApprove = false;
+
         private void cnctbtn_Click(object sender, EventArgs e)
         {
             try
@@ -456,16 +739,45 @@ namespace NP_Hangman
                 }
                 else
                 {
-                    isGuessing = true; // means k is ne word guess karna he
-                    CheckForIllegalCrossThreadCalls = false;
-                    client.Connect(IPAddress.Loopback, 11000);
-                    NetworkStream ns = client.GetStream();
-                    StreamWriter sw = new StreamWriter(ns);
-                    sw.WriteLine("@name@," + nameTxt.Text);
-                    playBTN.Enabled = HostBtn.Enabled = isHost = false;
-                    cncttxt.Hide();
+                    clientName = isHost ? "Host": nameTxt.Text.Trim(); // if client then set the name to the chosen name
+                    string myIP = "";
+                    if (cncttxt.Text.Trim().Contains("192"))
+                    {
+                        myIP = cncttxt.Text;
+                    }
+                    else
+                    {
+                        string hostname = cncttxt.Text;
+                        try
+                        {
+                           // myIP = Dns.GetHostByName(hostname).AddressList[0].ToString();
+                            IPHostEntry ipHostInfo = Dns.GetHostEntry(hostname); // `Dns.Resolve()` method is deprecated.
+                            myIP = ipHostInfo.AddressList[1].ToString();
+                        }
+                        catch (Exception err)
+                        {
 
+                            MessageBox.Show(err.ToString());
+                        }
+                        
+                    }
+                    
+                   //isGuessing = true; // means k is ne word guess karna he
+                    CheckForIllegalCrossThreadCalls = false;
+                    client.Connect(IPAddress.Parse(myIP), 11000);
+                    NetworkStream ns = client.GetStream();
+                    StreamWriter sw = new StreamWriter(ns); 
+
+                    //this is the first message to the server 
+                    sw.WriteLine("@name@," + nameTxt.Text);
+
+                    nameTxt.Enabled = false;
+                    HostBtn.Enabled = isHost = false;
+                    //playBTN.Hide();
+                    HostBtn.Hide();
+                    cncttxt.Hide();
                     playStatuslbl.Text = "Client";
+
                     sw.Flush();
                     ns.BeginRead(b, 0, b.Length, ReadMsg, ns);
                 }
@@ -478,12 +790,33 @@ namespace NP_Hangman
             }
            
         }
-
         private void Hangman_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Tata babu mushai :)");
+            //MessageBox.Show("Tata babu mushai :)");
         }
 
-        
+        private void metroRadioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            MetroCheckBox m = (MetroCheckBox)sender;
+            //m.Checked = m.Checked ? false : true;
+            if (m.Checked)
+            {
+                if (isHost)
+                {
+
+                    int len = m.Name.Length - 2;
+                    string name = m.Name.Replace("CBtn", "");
+                    activeClient = lstClients[name];
+                    currentPlayerLbl.Text = m.Name.Substring(4);
+                }
+                else
+                {
+                    string name = m.Name.Replace("CBtn", "");
+                    clientChosen = true;
+                    chosenClient = name;
+                    currentPlayerLbl.Text = m.Name.Substring(4);
+                }
+            }
+        }
     }
 }
