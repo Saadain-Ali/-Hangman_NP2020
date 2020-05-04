@@ -24,18 +24,16 @@ namespace NP_Hangman
         List<BunifuThinButton2> btns = new List<BunifuThinButton2>();
         int maxWrongGuess = 5;
         string rightGuess = "";
-        List<TcpClient> clients = new List<TcpClient>(); //ToolBar store connected clients
-        TcpListener server;
+        List<TcpClient> clients = new List<TcpClient>(); //ToolBar store connected clients  
         TcpClient activeClient;
         bool isPlaying = false;
         bool isGuessing = false;
-        bool CTC = false; //client to Client
         int lifeCounter = 0;
+        bool isSinglePlayer = false;
 
         bool isHost = false;
 
         /// <summary> FOR CLIENT SIDE ONLY
-        TcpClient PlayerForClient;
         string chosenClient = "";
         bool clientChosen = false;
         string clientName ;
@@ -53,12 +51,43 @@ namespace NP_Hangman
         private void playBTN_Click(object sender, EventArgs e)
         {
             messageCmnt.Text = "";
-             //validations checking
             if (nameTxt.Text.Trim(' ') == "")
             {
                 nameTxt.LineIdleColor = Color.Red;
             }
-            if (wordTxt.Text.Trim(' ') == "")
+            else if (!clientChosen && activeClient == null)
+            {
+                DialogResult ans = MessageBox.Show("No Player Selected! Do You want to play as single Player", "Request", MessageBoxButtons.YesNo);
+                if (ans == DialogResult.Yes)
+                {
+                   
+                    reseter();
+                    picturePnlReseter();
+                    wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = false;
+
+                    wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = false;
+                    isSinglePlayer = true;
+                    //selects Random word
+                    string filePath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Words.txt");
+                    using (TextReader tr = new StreamReader(filePath, Encoding.ASCII))
+                    {
+                        Random r = new Random();
+                        var allWords = tr.ReadToEnd().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] Chosenwords = allWords[r.Next(0, allWords.Length - 1)].Split('~');
+                        word = Chosenwords[0].Trim().ToUpper();
+                        hintTxt.Text = Chosenwords[1];
+                    }
+                    isGuessing = true;
+                    lifeMeterlbl.Text = "5";
+                    this.KeyPreview = true;
+                    isPlaying = true;
+                    lenLbl.Text = word.Length.ToString();
+                    wordInitiator(word.Length);
+                    Thread.Sleep(1500);
+                }
+            }
+             //validations checking
+            else if (wordTxt.Text.Trim(' ') == "")
             {
                wordTxt.LineIdleColor = Color.Red;
             }
@@ -75,7 +104,7 @@ namespace NP_Hangman
                 {
                    
                     //a request is sent to the guesser
-                    sendToClient("play," + word, activeClient);
+                    sendToClient("play," + word + "~" + hintTxt.Text, activeClient);
                 }
                 else
                 {
@@ -84,12 +113,18 @@ namespace NP_Hangman
                     {
                         if (chosenClient == "Host\r\n")
                         {
-                            clientWriter("play,"+ word);
+                            clientWriter("play,"+ word + "~" + hintTxt.Text);
                         }
                         else
                         {
-                            clientWriter("playClient,"+ nameTxt.Text + "\r\n," + chosenClient + "," + word); // this means client wants to play with other client
+                            clientWriter("playClient,"+ nameTxt.Text + "\r\n," + chosenClient + "," + word + "~" + hintTxt.Text); // this means client wants to play with other client
                         }
+                    }
+                    else
+                    {
+                 
+                   
+                        
                     }
                 }
 
@@ -157,18 +192,8 @@ namespace NP_Hangman
                     //generate checkboxes for new clients
                     MetroCheckBox chkBox = checkBoxMaker(msg[1]);
 
-                    //wordInitiator(Convert.ToInt32(msg[1]));
                     //this is the first confirmation msg from server with prefix "wc" ie welcome
                     sendToClient("wc,You are connected to " + nameTxt.Text, client);
-
-                    //to send already connected clients to the new client
-                    //String ClientsToSend = "";
-                    //foreach (String item in lstClients.Keys)
-                    //{
-                    //    ClientsToSend += item + "~";
-                    //}
-
-                    // sendToClient("CCL," + ClientsToSend + "Host", client); //send already connected clients list to new client
                     
                     lstClients.Add(msg[1], client); //name and client is stored in dictionary
                     sendClientCLlist();
@@ -177,9 +202,7 @@ namespace NP_Hangman
                 {
                     TcpClient play1 = lstClients[msg[1]]; //player 1;
                     TcpClient play2 = lstClients[msg[2]]; //       player2  lstClients.Keys.Where((x) => x.Contains(msg[1]));
-                    //NetworkStream p2Stream =  play2.GetStream();
-                    //StreamWriter sw = new StreamWriter(p2Stream);
-                    //sw.Write(:);
+                    
                                              //p1           //p2        //word 
                     sendToClient("playC2C," +msg[1] + "," + msg[2] +"," +msg[3], play2);
                 }
@@ -202,7 +225,14 @@ namespace NP_Hangman
                         sw.Flush();
                         reseter();
                         picturePnlReseter();
-                        word = msg[1].Remove(msg[1].Length - 2, 2);
+                        wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = false;
+
+
+                        string[] chosenWords = msg[1].Split('~');
+                        word = chosenWords[0].Trim('\n').Trim('\r').ToUpper();
+                        // word = chosenWords[0].Remove(msg[1].Length - 2, 2).Trim().ToUpper();
+                        hintTxt.Text = chosenWords[1];
+
                         isGuessing = true;
                         lifeMeterlbl.Text = "5";
                         this.KeyPreview = true;
@@ -237,12 +267,10 @@ namespace NP_Hangman
                     TcpClient play1 = lstClients[msg[1]];
                     TcpClient play2 = lstClients[msg[2]];
                     sendToClient( msg[3] + "," + msg[2], play1);
-                    //sendToClient("PVPcheck" + msg[3] + "," + msg[2], play1);
                 }
                 else
                 {
                     // recieved msg is here !!! keys from A to Z
-                    //pressed = msg[0];
                     char letter = Convert.ToChar(msg[0][0]);
                     if (((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z')) && !pressed.Contains(letter))
                     {
@@ -285,9 +313,6 @@ namespace NP_Hangman
                 else if (msg[0].Contains("playC2C"))
                 {
                     PVPStart(msg);
-                    //TcpClient play1 = lstClients[msg[1]]; //player 1;
-                    //TcpClient play2 = lstClients[msg[2]];
-                    //yaha client to client kaam hoga sara
                 }
                 else if (msg[0] == "play")
                 {
@@ -302,8 +327,15 @@ namespace NP_Hangman
 
                         reseter();                        //Reseting Panels
                         picturePnlReseter();              //
+                        wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = false;
 
-                        word = msg[1].Remove(msg[1].Length - 2, 2);
+
+
+                        string[] chosenWords = msg[1].Split('~');
+                        word = chosenWords[0].Trim('\n').Trim('\r').ToUpper();
+                        //word = chosenWords[0].Remove(msg[1].Length - 2, 2).Trim().ToUpper();
+                        hintTxt.Text = chosenWords[1];
+
                         isGuessing = true;
                         lifeMeterlbl.Text = "5";
                         this.KeyPreview = true;
@@ -337,7 +369,6 @@ namespace NP_Hangman
                 else //if there is no prefix then it must be a pressed key
                 {
                     // recieved msg is here !!! keys from A to Z
-                    //pressed = msg[0];
                     char letter = Convert.ToChar(msg[0][0]);
                     if (((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z')) && !pressed.Contains(letter))
                     {
@@ -375,7 +406,15 @@ namespace NP_Hangman
                 reseter();                        //Reseting Panels
                 picturePnlReseter();              //
                 isPVP = true;
-                word = msg[3].Remove(msg[3].Length - 2, 2);
+                wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = false;
+
+                string[] chosenWords = msg[3].Split('~');
+                word = chosenWords[0].Trim('\n').Trim('\r').ToUpper();
+                //word = chosenWords[0].Remove(msg[1].Length - 2, 2).Trim().ToUpper();
+                hintTxt.Text = chosenWords[1];
+
+
+               // word = msg[3].Remove(msg[3].Length - 2, 2);
                 isGuessing = true;
                 lifeMeterlbl.Text = "5";
                 this.KeyPreview = true;
@@ -397,6 +436,7 @@ namespace NP_Hangman
         {
             foreach (PictureBox item in picturepnl.Controls)
                 item.Hide();
+            wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = false;
             MessageBox.Show("Game is Starting");
             if (playApprove)
             {
@@ -405,14 +445,10 @@ namespace NP_Hangman
                 wordTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
                 hintTxt.LineIdleColor = Color.FromArgb(0, 170, 173);
 
-
                 int lenTxt = Convert.ToInt32(wordTxt.Text.Length);
                 lenLbl.Text = wordTxt.Text.Length.ToString();
                 lifeMeterlbl.Text = maxWrongGuess.ToString();
                 word = wordTxt.Text.Trim().ToUpper();
-
-
-
 
                 //To populate and display the chosen words on display wordpanel on the top
                 wordInitiator(word.Length);
@@ -494,14 +530,25 @@ namespace NP_Hangman
                         if (isPVP)
                         {
                             clientWriter("PVPguess," + player1 + "," + player2+ "," +letter.ToString());
+                            guesser(letter);
+                        }
+                        else if(isSinglePlayer)
+                        {
+                           singlePlayer(letter);
+                        }
+                        else if (!isHost)
+                        {
+                            StreamWriter sw = new StreamWriter(hostStream);
+                            //this is the first message to the server 
+                            sw.WriteLine(letter.ToString());
+                            sw.Flush();
+                            guesser(letter);
                         }
                         else
                         {
-                            sendToClient(letter.ToString(), client);
-                        }
-                        
-                        //guessWrtxt.Text += e.KeyData.ToString();
-                        guesser(letter);
+                            sendToClient(letter.ToString(), activeClient);
+                            guesser(letter);
+                        }                   
                     }
                 }
                 else
@@ -565,7 +612,6 @@ namespace NP_Hangman
                 if (rightGuess.Length == word.Length)
                 {
                     won();
-                    
                     reseter();
                 }
             }
@@ -595,6 +641,8 @@ namespace NP_Hangman
 
         private void reseter()
         {
+            wordTxt.Enabled = hintTxt.Enabled = RandomBTN.Enabled = true;
+            isSinglePlayer = false;
             isPVP = false;
             isPlaying = false;
             lifeCounter = 0;
@@ -624,7 +672,8 @@ namespace NP_Hangman
 
         private void Lost()
         {
-            messageCmnt.Text = "Booo!!! You Lost!!";
+            messageCmnt.Text = "Booo!!! You Lost!!! \n The word was " + word;
+            
         }
        
 
@@ -652,7 +701,7 @@ namespace NP_Hangman
             chkbox.Text = name;
             chkbox.UseStyleColors = true;
             chkbox.UseVisualStyleBackColor = true;
-            chkbox.CheckedChanged += new System.EventHandler(this.metroRadioButton1_CheckedChanged);
+            chkbox.CheckStateChanged += new System.EventHandler(this.metroRadioButton1_CheckedChanged);
 
             boxes.Add(chkbox);
             this.BeginInvoke((Action)(() =>
@@ -671,7 +720,9 @@ namespace NP_Hangman
             //cnctbtn.Enabled = cncttxt.Enabled = false;
             cnctbtn.Hide();
             cncttxt.Hide();
+
             CheckForIllegalCrossThreadCalls = false;
+
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
             IPAddress ipAddress = ipHostInfo.AddressList[1];
             //TcpListener listener = new TcpListener(IPAddress.Loopback, 11000);
@@ -689,12 +740,6 @@ namespace NP_Hangman
                 StreamWriter sdr = new StreamWriter(stream);
                 sdr.WriteLine("Leave");
                 sdr.Flush();
-                //    textBox1.AppendText(Environment.NewLine);
-                //    textBox1.AppendText("Me: " + textBox3.Text);
-                //    NetworkStream stream = item.GetStream();
-                //    StreamWriter sdr = new StreamWriter(stream);
-                //    sdr.WriteLine(textBox3.Text);
-                //    sdr.Flush();
             }
         }
 
@@ -733,12 +778,19 @@ namespace NP_Hangman
         {
             try
             {
-                if (nameTxt.Text.Trim() == "")
+                if (nameTxt.Text.Trim() == "" )
                 {
                     nameTxt.LineIdleColor = Color.Red;
                 }
+                else if (cncttxt.Text.Trim() == "")
+                {
+                    cncttxt.LineIdleColor = Color.Red;
+                }
                 else
                 {
+                    nameTxt.LineIdleColor = Color.Teal;
+                    cncttxt.LineIdleColor = Color.Teal;
+
                     clientName = isHost ? "Host": nameTxt.Text.Trim(); // if client then set the name to the chosen name
                     string myIP = "";
                     if (cncttxt.Text.Trim().Contains("192"))
@@ -757,7 +809,8 @@ namespace NP_Hangman
                         catch (Exception err)
                         {
 
-                            MessageBox.Show(err.ToString());
+                            //MessageBox.Show(err.ToString());
+                            MessageBox.Show("IP is Invalid please enter a valid IP");
                         }
                         
                     }
@@ -797,7 +850,13 @@ namespace NP_Hangman
 
         private void metroRadioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            
             MetroCheckBox m = (MetroCheckBox)sender;
+            foreach (MetroCheckBox item in flowLayoutPanel1.Controls)
+            {
+                if(item != m)
+                    item.Checked = false;
+            }
             //m.Checked = m.Checked ? false : true;
             if (m.Checked)
             {
@@ -816,6 +875,73 @@ namespace NP_Hangman
                     chosenClient = name;
                     currentPlayerLbl.Text = m.Name.Substring(4);
                 }
+            }
+            else
+            {
+                if (isHost)
+                {
+                    activeClient = null;
+                    currentPlayerLbl.Text = "";
+                }
+
+                else
+                {
+                    chosenClient = null;
+                    clientChosen = false;
+                    currentPlayerLbl.Text = "";
+                }
+            }
+        }
+
+
+
+        private void singlePlayer(char letter)
+        {
+            if (word.Contains(letter))
+            {
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (word[i] == letter)
+                    {
+                        btns[i].ButtonText = letter.ToString();
+                        rightGuess += letter;
+                    }
+                }
+                if (rightGuess.Length == word.Length)
+                {
+                    won();
+
+                    reseter();
+                }
+            }
+            else
+            {
+                lifeCounter++;
+                guessWrtxt.Text += letter.ToString();
+                lifeMeterlbl.Text = (maxWrongGuess - lifeCounter).ToString();
+                int index = picturepnl.Controls.IndexOfKey("HG" + (lifeCounter).ToString());
+                picturepnl.Controls[index].Visible = true;
+                //picturepnl.Controls[(guessWrtxt.Text.Length) - 1].Visible = true;
+                if (guessWrtxt.Text.Length >= maxWrongGuess)
+                {
+                    isPlaying = false;
+                    Lost();
+                    reseter();
+                }
+            }
+            pressed += letter;
+        }
+
+        private void RandomBTN_Click(object sender, EventArgs e)
+        {
+            string filePath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Words.txt");
+            using (TextReader tr = new StreamReader(filePath, Encoding.ASCII))
+            {
+                Random r = new Random();
+                var allWords = tr.ReadToEnd().Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] chosenWords = allWords[r.Next(0, allWords.Length - 1)].Split('~');
+                wordTxt.Text =chosenWords[0].Trim().ToUpper() ;
+                hintTxt.Text = chosenWords[1].Trim();
             }
         }
     }
